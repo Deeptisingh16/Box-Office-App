@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Starred from './pages/Starred';
+import MainLayout from './components/MainLayout';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />}></Route>
+        <Route element={<MainLayout />}>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/starred" element={<Starred />}></Route>
+        </Route>
         <Route path="/contact" element={<div>CONTACT</div>}></Route>
-        <Route path="/starred" element={<Starred />}></Route>
         <Route path="*" element={<div>NOT FOUND</div>}></Route>
         {/* <Route path="/" element={<App />}>
           <Route index element={<Home />} />
