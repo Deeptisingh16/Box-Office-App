@@ -7,7 +7,7 @@ import ActorsGrid from '../components/actors/ActorsGrid';
 import { useQuery } from '@tanstack/react-query';
 
 const Home = () => {
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(null);
 
   const { data: apiData, error: apiDataError } = useQuery({
     queryKey: ['search', filter],
