@@ -1,34 +1,8 @@
 import ShowCard from './ShowCard';
-import { useReducer, useEffect } from 'react';
-
-const usePersistedReducer = (reducer, intialState, localStorageKey) => {
-  const [state, dispatch] = useReducer(reducer, intialState, initial => {
-    const persistedValue = localStorage.getItem(localStorageKey);
-    return persistedValue ? JSON.parse(persistedValue) : initial;
-  });
-
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify);
-  }, [state, localStorageKey]);
-
-  return [state, dispatch];
-};
-const starredShowReducer = (currentStarred, action) => {
-  switch (action.type) {
-    case 'STAR':
-      return currentStarred.concat(action.showId);
-    case 'UNSTAR':
-      return currentStarred.filter(showId => showId !== action.showId);
-    default:
-      return currentStarred;
-  }
-};
+import { FlexGrid } from '../common/FlexGrid';
+import { useStarredShows } from '../../lib/useStarredShows';
 const ShowGrid = ({ shows }) => {
-  const [starredShows, dispatchStarred] = usePersistedReducer(
-    starredShowReducer,
-    [],
-    'starredShows'
-  );
+  const [starredShows, dispatchStarred] = useStarredShows();
 
   const onStarMeClick = showId => {
     const isStarred = starredShows.includes(showId);
@@ -39,7 +13,7 @@ const ShowGrid = ({ shows }) => {
     }
   };
   return (
-    <div>
+    <FlexGrid>
       {shows.map(data => (
         <ShowCard
           key={data.show.id}
@@ -50,9 +24,10 @@ const ShowGrid = ({ shows }) => {
           }
           summary={data.show.summary}
           onStarMeClick={onStarMeClick}
+          isStarred={starredShows.includes(data.show.id)}
         />
       ))}
-    </div>
+    </FlexGrid>
   );
 };
 

@@ -4,7 +4,6 @@ import AppTitle from './AppTitile';
 const MainLayout = () => {
   return (
     <div>
-      HI THEREE!!
       <AppTitle />
       <Navs />
       <Outlet />
