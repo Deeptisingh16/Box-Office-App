@@ -20,7 +20,7 @@ function App() {
             </Route>
             <Route path="/show/:showId" element={<Show />}></Route>
 
-            <Route path="*" element={<div>NOT FOUND</div>}></Route>
+            <Route path="*" element={<div>Not Found</div>}></Route>
           </Routes>
         </BrowserRouter>
       </GlobalTheme>
